@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const dns = require("dns");
 const urlparser = require("url");
 // Basic Configuration
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3004;
 
 app.use(cors());
 app.use(express.json());
@@ -15,9 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(`${process.cwd()}/public`));
 
 mongoose
-  .connect(
-    "mongodb+srv://danieljemmo:uza2DHIBzOVyOKVS@database.t6hhdgp.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.mongodb_uri)
   .then(() => console.log("mongodb is connected ..."))
   .catch((err) => console.error(err));
 
